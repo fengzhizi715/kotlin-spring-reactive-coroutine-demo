@@ -52,8 +52,6 @@ class UserController {
 
         }.await()
 
-        val message = "Hi ${user.name}, you have logged in since $lastLoginTime"
-
-        message
+        "Hi ${user.name}, you have logged in since $lastLoginTime"
     }
 }

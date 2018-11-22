@@ -61,6 +61,6 @@ class UserReactiveService {
     private fun generate(age: Int): User {
 
         val address = Address(age, streets[age % streets.size], cities[age % cities.size])
-        return User("dude$age", age, address)
+        return User("Tony$age", age, address)
     }
 }
