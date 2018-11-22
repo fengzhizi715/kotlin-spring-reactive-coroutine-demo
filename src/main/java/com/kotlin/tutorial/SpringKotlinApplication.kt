@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
  * Created by tony on 2018/11/13.
  */
 @SpringBootApplication
-open class SpringKotlinApplication
+class SpringKotlinApplication
 
 fun main(args: Array<String>) {
     SpringApplication.run(SpringKotlinApplication::class.java, *args)
