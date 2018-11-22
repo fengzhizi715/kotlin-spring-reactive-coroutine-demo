@@ -29,7 +29,7 @@ class UserRxJavaService {
         val streets = listOf("renming road", "zhongshan road").toLower()
     }
 
-    fun findByName(name:String): Flowable<User> = userRepository.findUserByName(name)
+    fun findByName(name: String): Flowable<User> = userRepository.findUserByName(name)
 
     fun find(age: Int?, rawCity: String?): Flowable<User> {
 
@@ -67,4 +67,10 @@ class UserRxJavaService {
 
         return User("dude$age", age, address)
     }
+
+    fun login(name: String) =
+            userRepository.findUserByName(name)
+            .map {
+                auditRepository.save(Audit(it.name, LocalDateTime.now()))
+            }
 }

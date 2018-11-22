@@ -10,5 +10,5 @@ import org.springframework.stereotype.Repository
 @Repository
 interface AuditRepository: CrudRepository<Audit, String> {
 
-    fun findByName(name: String): Audit
+    fun findFirstByNameOrderByEventDateDesc(name: String): Audit
 }

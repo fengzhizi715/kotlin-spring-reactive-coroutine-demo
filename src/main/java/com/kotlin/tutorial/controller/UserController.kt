@@ -5,6 +5,7 @@ import com.kotlin.tutorial.service.UserReactiveService
 import com.kotlin.tutorial.service.UserRxJavaService
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
+import kotlinx.coroutines.reactive.awaitLast
 import kotlinx.coroutines.reactive.awaitSingle
 import kotlinx.coroutines.runBlocking
 import org.springframework.beans.factory.annotation.Autowired
@@ -38,8 +39,11 @@ class UserController {
     @GetMapping("/rxjava/generate")
     fun genDateByRx() = userRxJavaService.generateData()
 
+    @GetMapping("/rxjava/login")
+    fun login(@RequestParam username: String) = userRxJavaService.login(username)
+
     @GetMapping("/coroutine/{username}")
-    fun getMessages(@PathVariable username: String) = runBlocking {
+    fun getLoginMessage(@PathVariable username: String) = runBlocking {
 
         val user = userRxJavaService.findByName(username).awaitSingle()
 
@@ -49,7 +53,7 @@ class UserController {
 
         }.await()
 
-        val message = "Hello ${user.name}, you have logged in since $lastLoginTime"
+        val message = "Hi ${user.name}, you have logged in since $lastLoginTime"
 
         message
     }

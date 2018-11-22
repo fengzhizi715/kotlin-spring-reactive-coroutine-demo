@@ -13,5 +13,5 @@ class AuditService {
     @Autowired
     lateinit var auditRepository: AuditRepository
 
-    fun findByName(name: String) = auditRepository.findByName(name)
+    fun findByName(name: String) = auditRepository.findFirstByNameOrderByEventDateDesc(name)
 }
