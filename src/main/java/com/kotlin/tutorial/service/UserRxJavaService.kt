@@ -65,7 +65,7 @@ class UserRxJavaService {
 
         val address = Address(age, streets[age % streets.size], cities[age % cities.size])
 
-        return User("dude$age", age, address)
+        return User("Tony$age", age, address)
     }
 
     fun login(name: String) =

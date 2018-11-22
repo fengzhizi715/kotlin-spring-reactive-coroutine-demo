@@ -5,7 +5,6 @@ import com.kotlin.tutorial.service.UserReactiveService
 import com.kotlin.tutorial.service.UserRxJavaService
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
-import kotlinx.coroutines.reactive.awaitLast
 import kotlinx.coroutines.reactive.awaitSingle
 import kotlinx.coroutines.runBlocking
 import org.springframework.beans.factory.annotation.Autowired
