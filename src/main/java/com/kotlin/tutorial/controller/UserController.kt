@@ -3,6 +3,7 @@ package com.kotlin.tutorial.controller
 import com.kotlin.tutorial.service.AuditService
 import com.kotlin.tutorial.service.UserReactiveService
 import com.kotlin.tutorial.service.UserRxJavaService
+import com.kotlin.tutorial.service.UserService
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.reactive.awaitSingle
@@ -24,6 +25,9 @@ class UserController {
     lateinit var userRxJavaService: UserRxJavaService
 
     @Autowired
+    lateinit var userService: UserService
+
+    @Autowired
     lateinit var auditService: AuditService
 
     @GetMapping("/reactive/find")
@@ -39,7 +43,17 @@ class UserController {
     fun genDateByRx() = userRxJavaService.generateData()
 
     @GetMapping("/rxjava/login")
-    fun login(@RequestParam username: String) = userRxJavaService.login(username)
+    fun mockLogin(@RequestParam username: String) = userRxJavaService.login(username)
+
+    @GetMapping("/blocking/{username}")
+    fun getNormalLoginMessage(@PathVariable username: String):String {
+
+        val user = userService.findByName(username)
+
+        val lastLoginTime = auditService.findByName(user.name).eventDate
+
+        return "Hi ${user.name}, you have logged in since $lastLoginTime"
+    }
 
     @GetMapping("/coroutine/{username}")
     fun getLoginMessage(@PathVariable username: String) = runBlocking {
