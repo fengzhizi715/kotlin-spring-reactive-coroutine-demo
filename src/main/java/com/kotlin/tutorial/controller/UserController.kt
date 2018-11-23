@@ -55,6 +55,18 @@ class UserController {
         return "Hi ${user.name}, you have logged in since $lastLoginTime"
     }
 
+    @GetMapping("/rxjava/{username}")
+    fun getRxLoginMessage(@PathVariable username: String)=
+            userRxJavaService.findByName(username)
+                    .map {
+
+                        auditService.findByName(it.name).eventDate
+                    }
+                    .map {
+
+                        "Hi ${username}, you have logged in since $it"
+                    }
+
     @GetMapping("/coroutine/{username}")
     fun getLoginMessage(@PathVariable username: String) = runBlocking {
 
